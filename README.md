@@ -24,3 +24,45 @@
 ### House Keeping
 
 - If you add another package, be sure to perform `pip freeze > requirements.txt` to update dependencies
+
+## API Documentation
+
+### **Upload Image API**
+
+`POST /api/upload-image` 
+
+Endpoint where image will be uploaded to. Optional `test` query parameter provided for testing/mocking out backend behavior.
+
+#### **Headers**
+| Key           | Value               |
+|---------------|---------------------|
+| `Content-Type` | `multipart/form-data` |
+
+#### **Body Parameters**
+| Parameter | Type | Required | Description                  |
+|-----------|------|----------|------------------------------|
+| `image`   | `file` | Yes      | The image file to be uploaded |
+
+#### **Query Parameters**
+| Parameter | Type   | Value     | Description                                                      |
+|-----------|--------|-----------|------------------------------------------------------------------|
+| `test`    | `string` | `success` | Verify that the image has been attached without processing.        |
+|           |          | `notfound` | Automatically return a 404 response.                            |
+|           |          | `error`    | Automatically return a 500 response.                            |
+|           |           | `None`    | The API functions as normal.            |
+
+---
+
+
+
+#### **Status Code: 200 OK**
+```json
+{
+  "title": "String",
+  "subtitle": "String",
+  "author": "String",
+  "rating": "number",
+  "length": "number",
+  "categories": "String",
+  "description": "String"
+}
