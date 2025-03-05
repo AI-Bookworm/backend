@@ -9,7 +9,7 @@
 - Install dependencies with `pip install -r requirements.txt`
 - Run the backend with `flask -A app run --host=0.0.0.0 --port=5001` 
   - The `host` argument allows you to connect to your API from other devices on the same network, such as your phone
-  - The port is set to 5001 as Airdrop runs on 4000.
+  - The port is set to 5001 as Airdrop runs on 5000.
 
 ## Development
 

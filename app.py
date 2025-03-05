@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 import api
+import ocr
 
 app = Flask(__name__)
 logger = app.logger
+ocr_ref = ocr.init_ocr()
 
 @app.route('/api/upload-image', methods=['POST'])
 def upload_image():
@@ -14,7 +16,12 @@ def upload_image():
             return jsonify({'message': 'No image part in the request'}), 400
         
         image = request.files['image']
-        return api.get_book_data(image)
+
+        book_data = api.get_book_data_from_image(ocr_ref, image)
+        if book_data == None:
+            return jsonify({'message': 'Book not found!'}), 404
+        else:
+            return jsonify(book_data), 200
     
     if test_mode == 'notfound':
         return jsonify({'message': 'Test 404 invoked!'}), 404
