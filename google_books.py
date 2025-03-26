@@ -18,7 +18,7 @@ def get_book_data(search_term):
 
     # Check if book exists
     if "items" not in data or not data["items"]:
-        return {"error": "No books found"}
+        return {"message": "No books found"}, 404
 
     # Extract only first book result
     item = data["items"][0]
@@ -33,6 +33,6 @@ def get_book_data(search_term):
         "page_count": volume_info.get("pageCount", "N/A"),
         "categories": volume_info.get("categories", ["No Categories"]),
         "description": volume_info.get("description", "No Description Available"),
-    }
+    }, 200
 
     return book

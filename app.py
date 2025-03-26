@@ -17,11 +17,8 @@ def upload_image():
         
         image = request.files['image']
 
-        book_data = api.get_book_data_from_image(ocr_ref, image)
-        if book_data == None:
-            return jsonify({'message': 'Book not found!'}), 404
-        else:
-            return jsonify(book_data), 200
+        book_data, status = api.get_book_data_from_image(ocr_ref, image)
+        return jsonify(book_data), status
     
     if test_mode == 'notfound':
         return jsonify({'message': 'Test 404 invoked!'}), 404

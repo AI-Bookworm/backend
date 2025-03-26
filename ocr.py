@@ -20,7 +20,7 @@ def read_book_cover(ocr_ref, image):
     '''
     recognition_predictor, detection_predictor = ocr_ref
     image = Image.open(image)
-    predictions = recognition_predictor([image], ['en'], detection_predictor)
+    predictions = recognition_predictor([image], [['en']], detection_predictor)
     full_cover_text = ' '.join([i.text for i in predictions[0].text_lines])
     top_three_most_confident_hits = [i.text for i in sorted(predictions[0].text_lines, key=lambda x: x.confidence, reverse=True)[:3]]
 

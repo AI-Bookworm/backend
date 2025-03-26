@@ -11,11 +11,11 @@ def get_book_data_from_image(ocr_ref, image):
     '''
     full_cover_text, top_three_most_confident_hits = ocr.read_book_cover(ocr_ref, image)
     
-    data = google_books.get_book_data(full_cover_text)
-    if data == None:
+    data, status = google_books.get_book_data(full_cover_text)
+    if status != '200':
         for hit in top_three_most_confident_hits:
-            data = google_books.get_book_data(hit)
-            if data != None:
-                return data
+            data, status = google_books.get_book_data(hit)
+            if status == '200':
+                return data, status
 
-    return None
+    return data, status
