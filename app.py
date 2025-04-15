@@ -18,6 +18,7 @@ def upload_image():
         image = request.files['image']
 
         book_data, status = api.get_book_data_from_image(ocr_ref, image)
+        print('Responding with output:', book_data)
         return jsonify(book_data), status
     
     if test_mode == 'notfound':
